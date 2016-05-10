@@ -68,4 +68,84 @@ class(lapply(classes, length)) #list 형태
 class(sapply(classes, length))
 class(vapply(classes, mean,FUN.VALUE=double(1)))
 
-sapply(classes, mean)
+sapply(classes, mean) #sapply 함수를 사용해서 목록에 mean 함수 적용
+sapply(classes, summary) #sapply 함수를 사용해서 목록에 summary 함수 적용
+rm(list=ls())
+#page85
+#피타고라스의 정리
+
+s <- 2
+t <- 1
+a <- s^2 - t^2
+b <- 2*s*t
+c <- s^2 + t^2
+a
+b
+c
+
+rm(list=ls())
+
+#Generate Pythagorean triples
+pythag <- function(x){
+  s <- x[1]pythag(1,2)
+  t <- x[2]
+  a <- t^2 - s^2
+  b <- 2 * s * t
+  c <- s^2 + t^2
+  cat("The Pythagorean triple is: ",a,b,c,"\n")
+}
+input <- scan()
+
+pythag(input)
+
+#page88
+#R을 사용해서 2차 방정식 풀기
+quadratic <- function(coeff){
+  a <- coeff[1]
+  b <- coeff[2]
+  c <- coeff[3]
+  d <- b^2 - (4*a*c)
+  cat("The discriminant is: ", d, "\n")
+  if(d < 0) cat("There are no real roots. ", "\n")
+  if(d >= 0){
+    root1 <- (-b+sqrt(d))/(2*a)
+    root2 <- (-b-sqrt(d))/(2*a)
+    cat("root1: ",root1,"\n")
+    cat("root2: ",root2,"\n")
+  }
+}
+quadratic(c(2,-1,-8))
+
+rm(list=ls())
+
+#page90
+#S3 와 S4 클래스
+info <- list(name = "Ray", gender = "Male", age = 52, salary = 38500)
+class(info) <- "member"
+attributes(info)
+
+#새로 만든 클래스는 일반적인 출력 구문을 사용하게 되면 다음과 같이 목록 형태로 출력된다.
+info
+
+#S3 스타일
+print.member <- function(person){
+  cat(person$name, "\n")
+  cat("gender",person$sex, "\n")
+  cat("age",person$age, "\n")
+  cat("salary",person$salary, "\n")
+}
+
+info
+
+#S4 스타일
+setClass("member",
+   representation (
+    name = "character" ,
+    sex = "character" ,
+    age = "numeric" ,
+    salary = "numeric" 
+   )
+)
+
+ray <- new("member",name="Ray", sex="Male", age=52, salary =38500)
+ray
