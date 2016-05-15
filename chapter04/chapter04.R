@@ -41,3 +41,40 @@ apply(zYr_2010,2,sd) #sd는 standard deviation의 줄임말로 표준편차이�
 #page133
 #모집단에서 N은 요소의 개수, n이 표본의 크기로 일반적으로 칭한다.
 #분산의 제곱근은 표준편차이다.
+var(Yr_2010) #분산을 구하는 함수
+sd(Yr_2010) #표준편차를 구하는 함수
+var(percapita[2:9])
+
+#범위
+range(weights) #가장 작은 값과 가장 큰값을 나타낸다.
+range.diff <- function(x) max(x) - min(x) #가장 큰값에서 가장 작은 값을 빼서 차이를 구하는 함수
+range.diff(weights)
+
+#중앙값과 표준 절대 편차
+mad(weights)
+mad(weights, center = mean(weights))
+
+hist(weights) #R 그래픽 디바이스가 별도의 플롯 창을 열어서 히스토그램을 보여준다.
+
+#page135
+IQR(weights) #사분위간 범위 (interquatile range, IQR)
+
+#page136
+CV <- function(x) sd(x)/mean(x)
+CV
+CV(weights)
+# 모집단의 표준 분포 크기나 혹은 평균과 표본의 연관성을 구하고 싶은 경우 
+# 변동계수(coefficeint of variation)를 구하면된다.
+
+# 종속 변수는 기준 혹은 반응 변수라고 불리며 독립 변수는 예측 변수 혹은 설명 변수라고 불린다.
+# 분산과 달리 공분산은 편차 점수의 외적으로 구해지며 따라서 양수나 0 혹은 음수가 될수있다.
+cov(Advertising, sales) #양의 상관성이 있다.
+cov(Advertising, sales) #공분산/(독립표준편차 * 종속표준편차)
+cov(Advertising, sales) / (sd(Advertising) * sd(sales))
+
+# 정상 분포는 그 정의에 따라 비대칭도가 0이며 뾰족한 정도도 0이다.(좌우가 완전히 겹쳐짐)
+head(Mileage)
+install.packages("psych") #psych 패키지를 설치한다.
+require(psych)
+skew(City) #비대칭도 
+kurtosi(City) #첨도(뾰족도)
